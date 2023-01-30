@@ -18,7 +18,7 @@ const birthdaySchema = new mongoose.Schema(
     {
         timestamps: true
     }
-)
+);
 
-const birthdays = mongoose.model('Birthdays', birthdaySchema)
-module.exports = birthdays
+const Birthdays = mongoose.model('Birthdays', birthdaySchema);
+module.exports = Birthdays;
