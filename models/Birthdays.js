@@ -12,8 +12,7 @@ const birthdaySchema = new mongoose.Schema(
         birthday: {
             type: Date,
             required: true,
-        }
-
+          }
     },
     {
         timestamps: true

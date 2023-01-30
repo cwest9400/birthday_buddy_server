@@ -16,10 +16,18 @@ router.get('/', async (req, res) => {
     } catch (err){
         res.status(400).json({error:err})
     }
-})
+});
 
 //CREATE BIRTHDAY
-router.put()
+router.post('/', async (req, res)=>{
+    try {
+        const createdBirthday = await Birthdays.create(req.body)
+        console.log(createdBirthday)
+        return res.status(200).json(createdBirthday)
+    } catch(error) {
+        res.status(400).json({error:err})
+    }
+})
 
 
 
