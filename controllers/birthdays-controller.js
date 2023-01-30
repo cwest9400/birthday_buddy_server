@@ -42,7 +42,13 @@ router.put('/:id', async (req, res)=>{
 })
 
 //DELETE BIRTHDAY
-
+router.delete('/:id', async ( req,res)=> {
+    try {
+        const deleteBirthday = await Birthdays.findByIdAndDelete(req.params.id)
+    } catch(error) {
+        res.status(400).json({error:err})
+    }
+})
 
 
 
