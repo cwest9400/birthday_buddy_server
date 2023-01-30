@@ -11,7 +11,7 @@ router.use(express.json());
 //ALL BIRTHDAYS
 router.get('/', async (req, res) => {
     try {
-        const allBirthdays = Birthdays.find({})
+        const allBirthdays = await Birthdays.find({})
         res.status(200).json(allBirthdays)
     } catch (err){
         res.status(400).json({error:err})
@@ -28,6 +28,21 @@ router.post('/', async (req, res)=>{
         res.status(400).json({error:err})
     }
 })
+
+//UPDATE BIRTHDAY
+router.put('/:id', async (req, res)=>{
+    try {
+        const updateBirthday = await Birthdays.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        console.log(updateBirthday)
+        return res.status(200).json(updateBirthday)
+
+    } catch(error) {
+        res.status(400).json({error:err})
+    }
+})
+
+//DELETE BIRTHDAY
+
 
 
 

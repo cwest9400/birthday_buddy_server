@@ -24,7 +24,7 @@ app.use('/birthdays', birthdaysController)
 //////////////
 
 //home redirect
-// app.get('/', (req,res)=>res.redirect('/?'))
+app.get('/', (req,res)=>res.redirect('/birthdays'))
 
 app.listen(PORT, ()=> {
     console.log(`listening on: ${PORT}`)
