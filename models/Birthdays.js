@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const bookSchema = new mongoose.Schema(
+const birthdaySchema = new mongoose.Schema(
     {
         firstName: {
             type: String,
@@ -11,6 +11,7 @@ const bookSchema = new mongoose.Schema(
         },
         birthday: {
             type: Date,
+            required: true,
         }
 
     },
@@ -19,5 +20,5 @@ const bookSchema = new mongoose.Schema(
     }
 )
 
-const book = mongoose.model('Book', BookSchema)
-module.exports = book
+const birthdays = mongoose.model('Birthdays', birthdaySchema)
+module.exports = birthdays

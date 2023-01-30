@@ -6,8 +6,9 @@ const app = express();
 
 
 //require controllers//
-
+const birthdaysController = require('./controllers/birthdays-controller')
 //////////////
+
 require('dotenv').config();
 require('./config/db.connection')
 
@@ -18,6 +19,7 @@ app.use(cors())
 app.use(morgan('dev'))
 
 //app.us(/'?', ?Controller) controller
+app.use('/birthdays', birthdaysController)
 
 //////////////
 
