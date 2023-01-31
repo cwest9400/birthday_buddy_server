@@ -1,9 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const bodyParser =require("body-parser")
 
 const app = express();
 
+//body parser middleware
+const urlencodedParser = bodyParser.urlencoded({ extended: false})
+app.use(bodyParser.json(), urlencodedParser)
 
 //require controllers//
 const birthdaysController = require('./controllers/birthdays-controller')
