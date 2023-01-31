@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser =require("body-parser")
+const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
+const User = require("./models/User")
 
 const app = express();
 
