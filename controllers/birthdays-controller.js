@@ -14,9 +14,19 @@ router.get('/', async (req, res) => {
         const allBirthdays = await Birthdays.find({})
         res.status(200).json(allBirthdays)
     } catch (err){
-        res.status(400).json({error:err})
+        res.status(400).json({error:error})
     }
 });
+
+//BIRTHDAY DETAIL
+router.get('/:id', async (req,res)=> {
+    try {
+        const birthday = await Movie.findById(req.params.id)
+        res.status(200).json(birthday)
+    }catch (error) {
+        res.status(400).json({error: error})
+    }
+})
 
 //CREATE BIRTHDAY
 router.post('/', async (req, res)=>{
@@ -25,7 +35,7 @@ router.post('/', async (req, res)=>{
         console.log(createdBirthday)
         return res.status(200).json(createdBirthday)
     } catch(error) {
-        res.status(400).json({error:err})
+        res.status(400).json({error:error})
     }
 })
 
@@ -37,7 +47,7 @@ router.put('/:id', async (req, res)=>{
         return res.status(200).json(updateBirthday)
 
     } catch(error) {
-        res.status(400).json({error:err})
+        res.status(400).json({error:error})
     }
 })
 
@@ -46,7 +56,7 @@ router.delete('/:id', async ( req,res)=> {
     try {
         const deleteBirthday = await Birthdays.findByIdAndDelete(req.params.id)
     } catch(error) {
-        res.status(400).json({error:err})
+        res.status(400).json({error:error})
     }
 })
 
