@@ -21,8 +21,8 @@ router.get('/', async (req, res) => {
 //BIRTHDAY DETAIL
 router.get('/:id', async (req,res)=> {
     try {
-        const birthday = await Movie.findById(req.params.id)
-        res.status(200).json(birthday)
+        const foundBirthday = await Birthdays.findById(req.params.id)
+        res.status(200).json(foundBirthday)
     }catch (error) {
         res.status(400).json({error: error})
     }
