@@ -100,6 +100,9 @@ app.post("/login", (req, res) => {
         })
 })
 
+app.get("/isUserAuth", verifyJWT, (req, res) => {
+    return res.json({isLoggedIn: true, email: req.user.email})
+})
 /////////////////////////////////////////////
 //AUTH MIDDLEWARE
 ////////////////////////////////////////////
