@@ -16,7 +16,7 @@ app.use(bodyParser.json(), urlencodedParser)
 
 //require controllers//
 const birthdaysController = require('./controllers/birthdays-controller')
-const authController = require('./controllers/auth-controller')
+// const authController = require('./controllers/auth-controller')
 //////////////
 
 require('dotenv').config();
@@ -66,18 +66,18 @@ app.post("/login", (req, res) => {
     const userLoggingIn = req.body;
 
     User.findOne({ email: userLoggingIn.email })
-        .then(dbUser => {
-            if (!dbUser) {
+        .then(User => {
+            if (!User) {
                 return res.json({
                     message: "Wrong Email or Password"
                 })
             }
-            bcrypt.compare(userLoggingIn.password, dbUser.password)
+            bcrypt.compare(userLoggingIn.password, User.password)
                 .then(isCorrect => {
                     if (isCorrect) {
                         const payload = {
-                            id: dbUser._id,
-                            email: dbUser.email,
+                            id: User._id,
+                            email: User.email,
                         }
                         jwt.sign(
                             payload,
@@ -121,7 +121,10 @@ function verifyJWT(req, res, next) {
         res.json({ message: "Incorrect Token Given", isLoggedIn: false})
     }
 }
-
+////access current user
+app.get("/getusername", verifyJWT, (req, res) => {
+    res.json({isLoggedIn: true, email: req.user.email})
+})
 
 
 
