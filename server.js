@@ -29,15 +29,11 @@ app.use(express.json())
 app.use(cors())
 app.use(morgan('dev'))
 
-//app.us(/'?', ?Controller) controller
+
 app.use('/birthdays', birthdaysController)
-// app.use('/register', authController)
-
-
-//////////////
 
 //home redirect
-app.get('/', (req, res) => res.redirect('/birthdays'))
+// app.get('/', (req, res) => res.redirect('/birthdays'))
 
 
 ///auth route///
