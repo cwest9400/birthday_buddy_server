@@ -17,9 +17,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        birthdays: {
-            type: Array,
-        }
+        birthdays: [{
+            type: mongoose.Types.ObjectId,
+            ref: "Birthday"
+        }]
     },
     {
         timestamps: true

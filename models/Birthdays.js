@@ -19,5 +19,5 @@ const birthdaySchema = new mongoose.Schema(
     }
 );
 
-const Birthdays = mongoose.model('Birthdays', birthdaySchema);
-module.exports = Birthdays;
+const Birthday = mongoose.model('Birthday', birthdaySchema);
+module.exports = Birthday;

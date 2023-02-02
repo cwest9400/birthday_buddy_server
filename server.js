@@ -7,6 +7,7 @@ const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const User = require("./models/User")
+const {verifyJWT} = require("./middleware")
 ///////
 const app = express();
 
@@ -82,7 +83,7 @@ app.post("/login", (req, res) => {
                         jwt.sign(
                             payload,
                             process.env.JWT_SECRET,
-                            { expiresIn: 86400 },
+                            { expiresIn: "24h" },
                             (err, token) => {
                                 if (err) return res.json({ message: err })
                                 return res.json({
@@ -100,30 +101,14 @@ app.post("/login", (req, res) => {
         })
 })
 
-/////////////////////////////////////////////
-//AUTH MIDDLEWARE
-////////////////////////////////////////////
-function verifyJWT(req, res, next) {
-    const token = req.headers["x-access-token"]?.split(' ')[1]
-    
-    if (token) {
-        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-            if (err) return res.json({
-                isLoggedIn: false,
-                message: "Failed to Authenticate"
-            })
-            req.user = {};
-            req.user.id = decoded.id
-            req.user.email = decoded.email
-            next()
-        })
-    } else {
-        res.json({ message: "Incorrect Token Given", isLoggedIn: false})
-    }
-}
+
+
 app.get("/isUserAuth", verifyJWT, (req, res) => {
+    console.log(req.user)
     return res.json({isLoggedIn: true, email: req.user.email})
+    
 })
+
 ////access current user
 app.get("/getusername", verifyJWT, (req, res) => {
     res.json({isLoggedIn: true, email: req.user.email})
