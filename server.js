@@ -6,7 +6,8 @@ const morgan = require('morgan');
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-const User = require("./models/User")
+//
+const User = require("./models")
 const {verifyJWT} = require("./middleware")
 ///////
 const app = express();
