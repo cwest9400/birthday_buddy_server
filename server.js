@@ -57,8 +57,24 @@ app.post("/register", async (req, res) => {
             email: user.email.toLowerCase(),
             password: user.password
         })
-        dbUser.save()
-        res.json({ message: "Success" })
+        const savedUser = await dbUser.save()
+        const payload = {
+            id: savedUser._id,
+            email: savedUser.email,
+        }
+        jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            { expiresIn: "24h" },
+            (err, token) => {
+                if (err) return res.json({ message: err })
+                return res.json({
+                    message: "Success",
+                    token: "Bearer " + token
+                })
+            }
+        )
+        // res.json({ message: "Success" })
     }
 })
 
@@ -67,18 +83,18 @@ app.post("/login", (req, res) => {
     const userLoggingIn = req.body;
 
     User.findOne({ email: userLoggingIn.email })
-        .then(User => {
-            if (!User) {
+        .then(user => {
+            if (!user) {
                 return res.json({
                     message: "Wrong Email or Password"
                 })
             }
-            bcrypt.compare(userLoggingIn.password, User.password)
+            bcrypt.compare(userLoggingIn.password, user.password)
                 .then(isCorrect => {
                     if (isCorrect) {
                         const payload = {
-                            id: User._id,
-                            email: User.email,
+                            id: user._id,
+                            email: user.email,
                         }
                         jwt.sign(
                             payload,
