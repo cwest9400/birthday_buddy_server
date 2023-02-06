@@ -6,7 +6,6 @@ const morgan = require('morgan');
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-//
 const User = require("./models/User")
 const {verifyJWT} = require("./middleware")
 ///////
@@ -116,7 +115,7 @@ app.post("/login", (req, res) => {
 
 
 app.get("/isUserAuth", verifyJWT, (req, res) => {
-    console.log(req.user)
+    
     return res.json({isLoggedIn: true, email: req.user.email})
     
 })
